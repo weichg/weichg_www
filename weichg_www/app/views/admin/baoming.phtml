@@ -1,0 +1,321 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="shortcut icon" href="http://zhaopin.weichg.com/favicon.ico" />
+<title>微城</title>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery-min.js"></script>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery.form.js"></script>
+<style type="text/css">
+body {
+	font-size: 13px;	
+}
+#Header {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-left: 10%;
+	height: auto;
+	margin-bottom: 2px;
+	clear: both;
+}
+#Logo {
+	width: 175px;
+	float: left;
+}
+#Top {
+	float:right;
+}
+#Navi {
+	background-color: #DB061C;
+	height: 36px;
+	clear: both;
+}
+#Navi ul {
+	list-style-type: none;
+}
+#Navi li {
+	list-style-type: none;
+	float: left;
+	margin: 10px;
+}
+#Navi li a {
+	text-decoration:none;
+	color:#000;
+}
+
+#Content {
+	margin-top: 50px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+#Ad {
+	margin-bottom: 20px;
+	text-align: center;
+	margin-right: 10%;
+	margin-left: 10%;
+	clear: both;
+}
+#Ad img{
+	width:980px;
+	text-align: center;
+	clear: both;
+}
+#RegionTitle {
+	text-align:center;
+	font-size:20px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+#Region {
+	float: left;
+	width:100%;
+	font-size: 14px;
+	margin-bottom: 50px;
+}
+#Region table {
+	width:100%
+}
+
+
+#Region td {
+	height: 30px;
+	text-align: center;
+	font-size: 13px;
+	line-height: 30px;
+	background-color: #EBEBEB;
+}
+#Region th {
+	background-color: #DB061C;
+	font-weight: bold;
+	color: #FFF;
+}
+#Region .box {
+	font-size: 14px;
+	height: 28px;
+	width:100px;
+	margin-right: 15px;
+	float: left;
+}
+#Region .check {
+	font-size: 14px;
+	height: 28px;
+	margin-right: 15px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#Region .box:hover{
+	border: 1px solid #DB061C;
+}
+#Region textarea:hover{
+	border: 1px solid #DB061C;
+}
+#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+	padding:8px 30px;
+	line-height:24px;
+	color:#fff;
+	font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+	cursor:pointer;
+	/*border:1px #ae7d0a solid;*/
+	-webkit-box-shadow:inset 0px 0px 1px #fff;
+	-moz-box-shadow:inset 0px 0px 1px #fff;
+	box-shadow:inset 0px 0px 1px #fff;
+	/*-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	text-shadow:1px 1px 0px #b67f01;/*字体阴影效果*/
+	background-color:#DB061C;
+}
+/*#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+padding:8px 30px;
+line-height:24px;
+color:#fff;
+font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+cursor:pointer;
+border:1px #ae7d0a solid;
+-webkit-box-shadow:inset 0px 0px 1px #fff;
+-moz-box-shadow:inset 0px 0px 1px #fff;
+box-shadow:inset 0px 0px 1px #fff;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+text-shadow:1px 1px 0px #b67f01;/
+background-color:#DB061C;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#DB061C), to(#e8a201));
+background-image: -webkit-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -moz-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -ms-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -o-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: linear-gradient(top, #DB061C 0%, #e8a201 100%);
+}*/
+/*#Region .jiaru:hover {
+background-color:#e8a201;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#DB061C));
+background-image: -webkit-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -moz-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -ms-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -o-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: linear-gradient(top, #e8a201 0%, #DB061C 100%);
+}*/
+#Region .err {
+	color: #F00;
+	font-size: 13px;
+	float: left;
+	height: 28px;
+	border: 1px dashed #F00;
+	display: none;
+	line-height: 28px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#Footer {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+</style>
+<script language="javascript">
+function getRegionList(id)
+{
+	$.get("../hr/region/?s_id=<?php echo $province_id;?>&id=" + id, function(data,status){
+		$("#province").html(data);
+	});
+	<?php if ($province_id) {?>
+	$.get("../hr/region/?s_id=<?php echo $city_id;?>&id=" + <?php echo $province_id;?>, function(data,status){
+		$("#city").html(data);
+	});
+	<?php }?>
+	<?php if ($city_id) {?>
+	$.get("../hr/region/?s_id=<?php echo $county_id;?>&id=" + <?php echo $city_id;?>, function(data,status){
+		$("#county").html(data);
+	});
+	<?php }?>
+	$("#province").on("change",this,function() {
+		if (this.value>0) {
+			$.get("../hr/region/?id=" + this.value, function(data,status){
+				$("#city").html(data);
+				$("#county").html('<option value="0">请选择</option>');
+		    });
+		} else {
+			$("#city").html('<option value="0">请选择</option>');
+			$("#county").html('<option value="0">请选择</option>');
+		}
+	});
+	$("#city").on("change",this,function() {
+		if (this.value>0) {
+			$.get("../hr/region/?id=" + this.value, function(data,status){
+				$("#county").html(data);
+		    });
+		} else {
+			$("#county").html('<option value="0">请选择</option>');
+		}
+	});
+}
+
+</script>
+</head>
+
+<body  onLoad="getRegionList(0)">
+<div id="Header">
+<div id="Logo">
+  <div><a href="../"><img src="http://zhaopin.weichg.com/images/logo.png" width="173" height="72"></a></div>
+</div>
+<div id="Top">
+  <div><a href="http://zhaopin.weichg.com/admin/logout">退出</a></div>
+</div>
+<div id="Navi"><ul>
+  <li><a href="http://zhaopin.weichg.com">首页</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/">关于微城</a></li>
+  <li><a href="http://zhaopin.weichg.com/hr/">人才招聘</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/link/">联系我们</a></li>
+</ul></div>
+</div>
+<div id="Ad"></div>
+<div id=Content>
+<div id="RegionTitle">报名列表</div>
+<div id="Region">
+  <form action="../admin/baoming" method="post" id="baoForm">
+<div class="check"><select name="province" id="province" class="box"  style="width:100px"><option value="0">请选择</option></select><select name="city" id="city" class="box" style="width:100px"><option value="0">请选择</option></select><select name="county" id="county" class="box" style="width:100px"><option value="0">请选择</option></select><input type="submit" name="search" value="查找" class="box"/></div>
+<table border="0" cellpadding="1" cellspacing="1">
+ <tr><th>ID</th><th>姓名</th><th>性别</th><th>身份证</th><th>联系电话</th><th>QQ</th><th>所属城市</th><th>就读大学</th><th>专业</th><th>经历</th><th>其他</th><th>简介</th><th>报名时间</th></tr>
+ <?php foreach ($page->items as $item) { ?>
+  <tr>
+    <td><?php echo $item['id']; ?></td>
+    <td><?php echo $item['truename']; ?></td>
+    <td><?php echo $item['sex']; ?></td>
+    <td><?php echo $item['idcard']; ?></td>
+    <td><?php echo $item['phone']; ?></td>
+    <td><?php echo $item['qq']; ?></td>
+    <td><?php echo $item['province'] . "|" . $item['city'] . "|" . $item['county'] ; ?></td>
+    <td><?php echo $item['college']; ?></td>
+    <td><?php echo $item['major']; ?></td>
+    <td><?php switch ($item['exps']) {
+           case 1:
+    	       echo "销售";
+    	       break;
+           case 2:
+           	   echo "宣传";
+           	   break;
+           case 3:
+           	   echo "销售|宣传";
+           	   break;
+           case 4:
+           	   echo "公关";
+           	   break;
+		   case 5:
+    	       echo "销售|公关";
+    	       break;
+           case 6:
+           	   echo "宣传|公关";
+           	   break;
+           case 7:
+           	   echo "销售|宣传|公关";
+           	   break;
+		} 
+    	?></td>
+    <td><?php switch ($item['other']) {
+           case 1:
+    	       echo "有笔记本";
+    	       break;
+           case 2:
+           	   echo "熟悉Office软件";
+           	   break;
+           case 3:
+           	   echo "有笔记本|熟悉Office软件";
+           	   break;
+		} 
+    	?></td>
+    <td><?php echo $item['profile']; ?></td>
+    <td><?php echo date("Y-m-d H:i:s", $item['bm_time']); ?></td>
+    </tr>
+ <?php } ?>
+  <tr>
+    <td colspan="13"><a href="../admin/baoming">第一页</a>
+<a href="../admin/baoming?page=<?php echo $page->before;?>">前一页</a>
+<a href="../admin/baoming?page=<?php echo $page->next;?>">下一页</a>
+<a href="../admin/baoming?page=<?php echo $page->last;?>">最后一页</a>
+
+<?php echo "当前页 ", $page->current, " 总共 ", $page->total_pages, " 总数 ", $page->total_items; ?></td>
+  </tr>
+</table></form>
+</div>
+</div>
+<div id=Footer>
+  Copyright &copy; 2014 微城网络科技
+</div>
+
+</body>
+</html>

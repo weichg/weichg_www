@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="shortcut icon" href="http://zhaopin.weichg.com/favicon.ico" />
+<title>微城</title>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery-min.js"></script>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery.form.js"></script>
+<style type="text/css">
+body {
+	font-size: 13px;	
+}
+#Header {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-left: 10%;
+	height: auto;
+	margin-bottom: 2px;
+	clear: both;
+}
+#Logo {
+}
+
+#Navi {
+	background-color: #DB061C;
+	height: 36px;
+}
+#Navi ul {
+	list-style-type: none;
+}
+#Navi li {
+	list-style-type: none;
+	float: left;
+	margin: 10px;
+}
+#Navi li a {
+	text-decoration:none;
+	color:#000;
+}
+
+#Content {
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+#Ad {
+	margin-bottom: 20px;
+	clear: left;
+	float: left;
+}
+#Region {
+	float: left;
+	font-size: 14px;
+	margin-bottom: 50px;
+	margin-left: 50px;
+}
+#Region table {
+}
+#Region td {
+	height: 50px;
+}
+
+#Region .box {
+	font-size: 14px;
+	height: 28px;
+	margin-right: 15px;
+	float: left;
+}
+#Region .check {
+	font-size: 14px;
+	height: 28px;
+	margin-right: 15px;
+	float: left;
+}
+
+#Region .box:hover{
+	border: 1px solid #DB061C;
+}
+#Region textarea:hover{
+	border: 1px solid #DB061C;
+}
+#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+	padding:8px 30px;
+	line-height:24px;
+	color:#fff;
+	font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+	cursor:pointer;
+	/*border:1px #ae7d0a solid;*/
+	-webkit-box-shadow:inset 0px 0px 1px #fff;
+	-moz-box-shadow:inset 0px 0px 1px #fff;
+	box-shadow:inset 0px 0px 1px #fff;
+	/*-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	text-shadow:1px 1px 0px #b67f01;/*字体阴影效果*/
+	background-color:#DB061C;
+}
+/*#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+padding:8px 30px;
+line-height:24px;
+color:#fff;
+font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+cursor:pointer;
+border:1px #ae7d0a solid;
+-webkit-box-shadow:inset 0px 0px 1px #fff;
+-moz-box-shadow:inset 0px 0px 1px #fff;
+box-shadow:inset 0px 0px 1px #fff;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+text-shadow:1px 1px 0px #b67f01;/
+background-color:#DB061C;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#DB061C), to(#e8a201));
+background-image: -webkit-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -moz-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -ms-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -o-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: linear-gradient(top, #DB061C 0%, #e8a201 100%);
+}*/
+/*#Region .jiaru:hover {
+background-color:#e8a201;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#DB061C));
+background-image: -webkit-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -moz-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -ms-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -o-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: linear-gradient(top, #e8a201 0%, #DB061C 100%);
+}*/
+#Region .err {
+	color: #F00;
+	font-size: 13px;
+	float: left;
+	height: 28px;
+	border: 1px dashed #F00;
+	display: none;
+	line-height: 28px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#Footer {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+</style>
+<script language="javascript">
+function getRegionList(id)
+{
+	$.get("../hr/region/?id=" + id, function(data,status){
+		$("#province").html(data);
+	});
+	$("#province").on("change",this,function() {
+		if (this.value>0) {
+			$.get("../hr/region/?id=" + this.value, function(data,status){
+				$("#city").html(data);
+				$("#county").html('<option value="0">请选择</option>');
+		    });
+		} else {
+			$("#city").html('<option value="0">请选择</option>');
+			$("#county").html('<option value="0">请选择</option>');
+		}
+	});
+	$("#city").on("change",this,function() {
+		if (this.value>0) {
+			$.get("../hr/region/?id=" + this.value, function(data,status){
+				$("#county").html(data);
+		    });
+		} else {
+			$("#county").html('<option value="0">请选择</option>');
+		}
+	});
+}
+
+function JiaruSubmit()
+{	
+    var submitValue = true;
+    if ($("#truename").val() == "") {
+		$("#truename_err").text("请填写姓名");
+		$("#truename_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#truename_err").hide();
+	}
+	var sex = document.getElementsByName("sex");
+	if (!sex[0].checked&&!sex[1].checked) {
+		$("#sex_err").text("请选择性别");
+		$("#sex_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#sex_err").hide();
+	}
+	/*if ($("#idcard").val() == "") {
+		$("#idcard_err").text("请填写身份证");
+		$("#idcard_err").fadeIn();
+		submitValue = false;
+	} else if (!/^\d{15}|\d{}18$/.test($("#idcard").val())) {
+		$("#idcard_err").text("身份证格式不正确");
+		$("#idcard_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#idcard_err").hide();
+	}*/
+	if ($("#phone").val() == "") {
+		$("#phone_err").text("请填写联系电话");
+		$("#phone_err").fadeIn();
+		submitValue = false;
+	} else if (!/^\d{7,11}$/.test($("#phone").val())) {
+		$("#phone_err").text("联系号码格式不正确");
+		$("#phone_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#phone_err").hide();
+	}
+	if ($("#college").val() == "") {
+		$("#college_err").text("请填写就读学校");
+		$("#college_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#college_err").hide();
+	}
+	if ($("#major").val() == "") {
+		$("#major_err").text("请填写专业");
+		$("#major_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#major_err").hide();
+	}
+	if ($("#province").val() == "0"||$("#city").val() == "0"||$("#county").val() == "0") {
+		$("#guanji_err").text("请填写贯籍");
+		$("#guanji_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#guanji_err").hide();
+	}
+	
+	/*if (!document.getElementById("agree").checked) {
+		$("#agree_err").text("需同意相关协议");
+		$("#agree_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#agree_err").hide();
+	}*/
+	if (submitValue) {
+		$('#jiaruForm').ajaxSubmit(function(result){
+			if (result == "success") {
+				alert("报名成功！");
+				$('#jiaruForm').resetForm();
+			} else {
+				alert("提交失败，请重试");
+			}
+		});
+	}
+
+    return false;
+}
+</script>
+</head>
+
+<body onLoad="getRegionList(0)">
+<div id="Header">
+<div id="Logo">
+  <div><a href="../"><img src="http://zhaopin.weichg.com/images/logo.png" width="173" height="72"></a></div>
+</div>
+<div id="Navi">
+<ul>
+  <li><a href="http://zhaopin.weichg.com">首页</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/">关于微城</a></li>
+  <li><a href="http://zhaopin.weichg.com/hr/">人才招聘</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/link/">联系我们</a></li>
+</ul>
+  </div>
+</div>
+
+<div id=Content>
+<div id="Ad"><img src="http://zhaopin.weichg.com/images/zhaopin.jpg"></div>
+<div id="Region">
+  <form action="../hr/baoming/" method="post" id="jiaruForm">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="100"><strong>姓名：</strong></td>
+    <td><input name="truename" type="text" class="box" id="truename" size="20" maxlength="20" />
+      <div id="truename_err" class="err"></div></td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>性别：</td>
+    <td><div class="check"><label><input name="sex" type="radio" value="男"/>男</label> <label><input name="sex" type="radio" value="女" />女</label></div><div id="sex_err" class="err"></div></td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>联系电话：</td>
+    <td><input name="phone" type="text" class="box" id="phone" size="30" maxlength="11" />
+    <div id="phone_err" class="err"></div>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>QQ：</td>
+    <td><input name="qq" type="text" class="box" id="qq" size="30" maxlength="20" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>贯籍：</td>
+    <td><div class="check"><select name="province" id="province" class="box"  style="width:100px"><option value="0">请选择</option></select><select name="city" id="city" class="box" style="width:100px"><option value="0">请选择</option></select><select name="county" id="county" class="box" style="width:100px"><option value="0">请选择</option></select></div><div id="guanji_err" class="err"></div>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>就读学校：</td>
+    <td><input name="college" type="text" class="box" id="college" size="40" maxlength="50" />
+    <div id="college_err" class="err"></div>
+    </td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>专业：</td>
+    <td><input name="major" type="text" class="box" id="major" size="40" maxlength="50" /><div id="major_err" class="err"></div></td>
+    
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>是否从事过：</td>
+    <td><div class="check"><label><input name="exps[]" type="checkbox" value="1" />销售</label> <label><input name="exps[]" type="checkbox" value="2" />宣传</label> <label><input name="exps[]" type="checkbox" value="4" />公关</label></div></td>
+    <td></td>
+    </tr>
+  <tr>
+    <td>其他：</td>
+    <td><div class="check"><label><input name="others[]" type="checkbox" value="1" />有笔记本</label> <label><input name="others[]" type="checkbox" value="2" />熟悉Office软件</label></div></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>个人简介：</td>
+    <td><textarea name="profile" id="profile" cols="40" rows="6" ></textarea></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><!-- <div class="check"><label><input name="agree" id="agree" type="checkbox" value="1" isChecked=false />同意《xxx协议》</label></div><div id="agree_err" class="err"></div> -->
+      <input type="button" name="jiaru" value="我要报名" class="jiaru" onClick="return JiaruSubmit();"/></td>
+    <td>&nbsp;</td>
+  </tr>
+</table></form>
+
+</div>
+</div>
+<div id=Footer>
+  Copyright &copy; 2014 微城网络科技</div>
+
+</body>
+</html>

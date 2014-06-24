@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="shortcut icon" href="http://zhaopin.weichg.com/favicon.ico" />
+<title>微城</title>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery-min.js"></script>
+<script language="javascript" src="http://zhaopin.weichg.com/js/jquery.form.js"></script>
+<style type="text/css">
+body {
+	font-size: 13px;	
+}
+#Header {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-left: 10%;
+	height: auto;
+	margin-bottom: 2px;
+	clear: both;
+}
+#Logo {
+}
+
+#Navi {
+	background-color: #DB061C;
+	height: 36px;
+}
+#Navi ul {
+	list-style-type: none;
+}
+#Navi li {
+	list-style-type: none;
+	float: left;
+	margin: 10px;
+}
+#Navi li a {
+	text-decoration:none;
+	color:#000;
+}
+
+#Content {
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+#Ad {
+	margin-bottom: 20px;
+	text-align: center;
+	margin-right: 10%;
+	margin-left: 10%;
+	clear: both;
+}
+#Ad img{
+	width:980px;
+	text-align: center;
+	clear: both;
+}
+#Region {
+	float: left;
+	font-size: 14px;
+	margin-bottom: 50px;
+	margin-left: 50px;
+}
+#Region table {
+    margin-top: 50px;
+}
+#Region td {
+	height: 50px;
+}
+
+#Region .box {
+	font-size: 14px;
+	height: 28px;
+	width:200px;
+	margin-right: 15px;
+	float: left;
+}
+#Region .check {
+	font-size: 14px;
+	height: 28px;
+	margin-right: 15px;
+	float: left;
+}
+
+#Region .box:hover{
+	border: 1px solid #DB061C;
+}
+#Region textarea:hover{
+	border: 1px solid #DB061C;
+}
+#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+	padding:8px 30px;
+	line-height:24px;
+	color:#fff;
+	font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+	cursor:pointer;
+	/*border:1px #ae7d0a solid;*/
+	-webkit-box-shadow:inset 0px 0px 1px #fff;
+	-moz-box-shadow:inset 0px 0px 1px #fff;
+	box-shadow:inset 0px 0px 1px #fff;
+	/*-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	text-shadow:1px 1px 0px #b67f01;/*字体阴影效果*/
+	background-color:#DB061C;
+}
+/*#Region .jiaru {
+    height:40px;
+    width: 120px;
+    border-style:none;
+padding:8px 30px;
+line-height:24px;
+color:#fff;
+font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+cursor:pointer;
+border:1px #ae7d0a solid;
+-webkit-box-shadow:inset 0px 0px 1px #fff;
+-moz-box-shadow:inset 0px 0px 1px #fff;
+box-shadow:inset 0px 0px 1px #fff;
+-webkit-border-radius:4px;
+-moz-border-radius:4px;
+border-radius:4px;
+text-shadow:1px 1px 0px #b67f01;/
+background-color:#DB061C;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#DB061C), to(#e8a201));
+background-image: -webkit-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -moz-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -ms-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: -o-linear-gradient(top, #DB061C 0%, #e8a201 100%);
+background-image: linear-gradient(top, #DB061C 0%, #e8a201 100%);
+}*/
+/*#Region .jiaru:hover {
+background-color:#e8a201;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#DB061C));
+background-image: -webkit-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -moz-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -ms-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: -o-linear-gradient(top, #e8a201 0%, #DB061C 100%);
+background-image: linear-gradient(top, #e8a201 0%, #DB061C 100%);
+}*/
+#Region .err {
+	color: #F00;
+	font-size: 13px;
+	float: left;
+	height: 28px;
+	border: 1px dashed #F00;
+	display: none;
+	line-height: 28px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#Footer {
+	width: 80%;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	clear: both;
+}
+</style>
+<script language="javascript">
+function LoginSubmit()
+{	
+    var submitValue = true;
+    if ($("#username").val() == "") {
+		$("#username_err").text("请填写用户名");
+		$("#username_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#username_err").hide();
+	}
+	if ($("#password").val() == "") {
+		$("#pass_err").text("您需要密码！");
+		$("#pass_err").fadeIn();
+		submitValue = false;
+	} else {
+		$("#pass_err").hide();
+	}
+	
+	if (submitValue) {
+		$('#loginForm').submit();
+	}
+
+    return false;
+}
+</script>
+</head>
+
+<body>
+<div id="Header">
+<div id="Logo">
+  <div><a href="../"><img src="http://zhaopin.weichg.com/images/logo.png" width="173" height="72"></a></div>
+</div>
+<div id="Navi"><ul>
+  <li><a href="http://zhaopin.weichg.com">首页</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/">关于微城</a></li>
+  <li><a href="http://zhaopin.weichg.com/hr/">人才招聘</a></li>
+  <li><a href="http://zhaopin.weichg.com/about/link/">联系我们</a></li>
+</ul></div>
+</div>
+<div id="Ad"></div>
+<div id=Content>
+<div id="RegionTitle"></div>
+<div id="Region">
+  <form action="../session/start" method="post" id="loginForm">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="100">用户名：</td>
+    <td><input name="username" type="text" class="box" id="username" size="20" maxlength="20" />
+      <div id="username_err" class="err"></div></td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td>密  码：</td>
+    <td><input name="password" type="password" class="box" id="password" size="20" maxlength="20" />
+    <div id="pass_err" class="err"></div>
+      </td>
+    <td>&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td><!-- <div class="check"><label><input name="agree" id="agree" type="checkbox" value="1" isChecked=false />同意《xxx协议》</label></div><div id="agree_err" class="err"></div> -->
+      <input type="button" name="jiaru" value="登    录" class="jiaru" onClick="return LoginSubmit();"/></td>
+    <td>&nbsp;</td>
+  </tr>
+</table></form>
+</div>
+</div>
+<div id=Footer>
+  Copyright &copy; 2014 微城网络科技
+</div>
+
+</body>
+</html>
